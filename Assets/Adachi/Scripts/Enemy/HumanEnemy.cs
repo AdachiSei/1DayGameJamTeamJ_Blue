@@ -14,6 +14,7 @@ public class HumanEnemy : EnemyBase
     Collider2D _rightPos;
 
     bool _isRightMoving;
+    bool _isPause;
 
     protected override void Awake()
     {
@@ -39,17 +40,20 @@ public class HumanEnemy : EnemyBase
         while (true)
         {
             await UniTask.Yield();
-            if (!_isMoving)
+            if (!_isPause)
             {
-                return;
-            }
-            if(_isRightMoving)
-            {
-                _rb.velocity = Vector2.right * Speed;
-            }
-            else
-            {
-                _rb.velocity = Vector2.left * Speed;
+                if (!_isMoving)
+                {
+                    return;
+                }
+                if (_isRightMoving)
+                {
+                    _rb.velocity = Vector2.right * Speed;
+                }
+                else
+                {
+                    _rb.velocity = Vector2.left * Speed;
+                }
             }
         }
     }
@@ -66,7 +70,24 @@ public class HumanEnemy : EnemyBase
     {
         _saveVelocity = _rb.velocity;
         _rb.velocity = Vector2.zero;
-        _rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        _rb.constraints = RigidbodyConstraints2D.FreezePosition;
         _isMoving = false;
+    }
+
+    protected override void Pause()
+    {
+        base.Pause();
+        _saveVelocity = _rb.velocity;
+        _rb.velocity = Vector2.zero;
+        _rb.constraints = RigidbodyConstraints2D.FreezePosition;
+        _isPause = true;
+    }
+
+    protected override void Restart()
+    {
+        base.Restart();
+        _isPause = false;
+        _rb.constraints = RigidbodyConstraints2D.None;
+        _rb.velocity = _saveVelocity;
     }
 }

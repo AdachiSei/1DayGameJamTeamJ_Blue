@@ -25,6 +25,10 @@ public class EnemyBase : MonoBehaviour
     protected virtual void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        PauseManager.Instance.OnPause += Pause;
+        PauseManager.Instance.OnRestart += Restart;
+        LightManager.Instance.LightOn += LightOn;
+        LightManager.Instance.LightOff += LightOff;
     }
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
@@ -43,6 +47,16 @@ public class EnemyBase : MonoBehaviour
     }
 
     protected virtual void LightOff()
+    {
+
+    }
+
+    protected virtual void Pause()
+    {
+
+    }
+
+    protected virtual void Restart()
     {
 
     }

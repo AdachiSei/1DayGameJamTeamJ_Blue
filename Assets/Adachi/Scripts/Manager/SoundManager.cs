@@ -22,6 +22,8 @@ public class SoundManager : SingletonMonoBehaviour<SoundManager>
     protected override void Awake()
     {
         base.Awake();
+        PauseManager.Instance.OnPause += Pause;
+        PauseManager.Instance.OnRestart += Restart;
         _audioSource = GetComponent<AudioSource>();
         PlayBGM(_bGMType);
     }
