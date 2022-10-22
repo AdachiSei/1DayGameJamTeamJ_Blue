@@ -25,9 +25,14 @@ public class FloorController : MonoBehaviour
 
     bool _isFirstDir = true;
     bool _isMoving = true;
+    bool _isPause;
 
     private void Awake()
     {
+        PauseManager.Instance.OnPause += Pause;
+        PauseManager.Instance.OnRestart += Restart;
+        LightManager.Instance.LightOn += LightOn;
+        LightManager.Instance.LightOff += LightOff;
         bool right = _dirType == FloorDirType.Right;
         bool left = _dirType == FloorDirType.Left;
         bool up = _dirType == FloorDirType.Up;
@@ -50,91 +55,95 @@ public class FloorController : MonoBehaviour
 
     async private void OnMove()
     {
-        await UniTask.Delay(_waitTime);
         switch (_dirType)
         {
             case FloorDirType.Right:
                 while (true)
                 {
                     await UniTask.Yield();
-                    if (!_isMoving)
+                    if (!_isPause && !_isMoving)
                     {
-                        return;
-                    }
-                    if (gameObject.transform.position.x >= _limitRange)
-                    {
-                        gameObject.transform.position =
-                        new Vector2(_limitRange, gameObject.transform.position.y);
-                        _isFirstDir = false;
-                        OnBack();
-                        return;
-                    }
-                    else
-                    {
-                        gameObject.transform.Translate(_speed, 0f, 0f);
+                        if (gameObject.transform.position.x >= _limitRange)
+                        {
+                            await UniTask.Delay(_waitTime);
+                            gameObject.transform.position =
+                            new Vector2(_limitRange, gameObject.transform.position.y);
+                            _isFirstDir = false;
+                            OnBack();
+                            return;
+                        }
+                        else
+                        {
+                            gameObject.transform.Translate(_speed, 0f, 0f);
+                        }
+
                     }
                 }
             case FloorDirType.Left:
                 while (true)
                 {
                     await UniTask.Yield();
-                    if (!_isMoving)
+                    if (!_isPause && !_isMoving)
                     {
-                        return;
-                    }
-                    if (gameObject.transform.position.x <= _limitRange)
-                    {
-                        gameObject.transform.position =
-                        new Vector2(_limitRange, gameObject.transform.position.y);
-                        _isFirstDir = false;
-                        OnBack();
-                        return;
-                    }
-                    else
-                    {
-                        gameObject.transform.Translate(_speed, 0f, 0f);
+                        if (gameObject.transform.position.x <= _limitRange)
+                        {
+                            await UniTask.Delay(_waitTime);
+                            gameObject.transform.position =
+                            new Vector2(_limitRange, gameObject.transform.position.y);
+                            _isFirstDir = false;
+                            OnBack();
+                            return;
+                        }
+                        else
+                        {
+                            gameObject.transform.Translate(_speed, 0f, 0f);
+
+                        }
                     }
                 }
             case FloorDirType.Up:
                 while (true)
                 {
                     await UniTask.Yield();
-                    if (!_isMoving)
+                    if (!_isPause && !_isMoving)
                     {
-                        return;
-                    }
-                    if (gameObject.transform.position.y >= _limitRange)
-                    {
-                        gameObject.transform.position =
-                        new Vector2(gameObject.transform.position.x, _limitRange);
-                        _isFirstDir = false;
-                        OnBack();
-                        return;
-                    }
-                    else
-                    {
-                        gameObject.transform.Translate(0f, _speed, 0f);
+
+                        if (gameObject.transform.position.y >= _limitRange)
+                        {
+                            await UniTask.Delay(_waitTime);
+                            gameObject.transform.position =
+                            new Vector2(gameObject.transform.position.x, _limitRange);
+                            _isFirstDir = false;
+                            OnBack();
+                            return;
+                        }
+                        else
+                        {
+                            gameObject.transform.Translate(0f, _speed, 0f);
+                        }
                     }
                 }
             case FloorDirType.Down:
                 while (true)
                 {
                     await UniTask.Yield();
-                    if (!_isMoving)
+                    if (!_isPause && !_isMoving)
                     {
-                        return;
-                    }
-                    if (gameObject.transform.position.y <= _limitRange)
-                    {
-                        gameObject.transform.position =
-                        new Vector2(gameObject.transform.position.x, _limitRange);
-                        _isFirstDir = false;
-                        OnBack();
-                        return;
-                    }
-                    else
-                    {
-                        gameObject.transform.Translate(0f, _speed, 0f);
+                        {
+                            if (gameObject.transform.position.y <= _limitRange)
+                            {
+                                await UniTask.Delay(_waitTime);
+                                gameObject.transform.position =
+                                new Vector2(gameObject.transform.position.x, _limitRange);
+                                _isFirstDir = false;
+                                OnBack();
+                                return;
+                            }
+                            else
+                            {
+                                gameObject.transform.Translate(0f, _speed, 0f);
+                            }
+                        }
                     }
                 }
         }
@@ -142,91 +151,90 @@ public class FloorController : MonoBehaviour
 
     async private void OnBack()
     {
-        await UniTask.Delay(_waitTime);
         switch (_dirType)
         {
             case FloorDirType.Right:
                 while (true)
                 {
                     await UniTask.Yield();
-                    if (!_isMoving)
+                    if (!_isPause && !_isMoving)
                     {
-                        return;
-                    }
-                    if (gameObject.transform.position.x <= _defalutRange)
-                    {
-                        gameObject.transform.position =
-                            new Vector2(_defalutRange, gameObject.transform.position.y);
-                        _isFirstDir = true;
-                        OnMove();
-                        return;
-                    }
-                    else
-                    {
-                        gameObject.transform.Translate(-_speed, 0f, 0f);
+                        if (gameObject.transform.position.x <= _defalutRange)
+                        {
+                            await UniTask.Delay(_waitTime);
+                            gameObject.transform.position =
+                                new Vector2(_defalutRange, gameObject.transform.position.y);
+                            _isFirstDir = true;
+                            OnMove();
+                            return;
+                        }
+                        else
+                        {
+                            gameObject.transform.Translate(-_speed, 0f, 0f);
+                        }
                     }
                 }
             case FloorDirType.Left:
                 while (true)
                 {
                     await UniTask.Yield();
-                    if (!_isMoving)
+                    if (!_isPause && !_isMoving)
                     {
-                        return;
-                    }
-                    if (gameObject.transform.position.x >= _defalutRange)
-                    {
-                        gameObject.transform.position =
-                            new Vector2(_defalutRange, gameObject.transform.position.y);
-                        _isFirstDir = true;
-                        OnMove();
-                        return;
-                    }
-                    else
-                    {
-                        gameObject.transform.Translate(-_speed, 0f, 0f);
+                        if (gameObject.transform.position.x >= _defalutRange)
+                        {
+                            await UniTask.Delay(_waitTime);
+                            gameObject.transform.position =
+                                new Vector2(_defalutRange, gameObject.transform.position.y);
+                            _isFirstDir = true;
+                            OnMove();
+                            return;
+                        }
+                        else
+                        {
+                            gameObject.transform.Translate(-_speed, 0f, 0f);
+                        }
                     }
                 }
             case FloorDirType.Up:
                 while (true)
                 {
                     await UniTask.Yield();
-                    if (!_isMoving)
+                    if (!_isPause && !_isMoving)
                     {
-                        return;
-                    }
-                    if (gameObject.transform.position.y <= _defalutRange)
-                    {
-                        gameObject.transform.position =
-                            new Vector2(gameObject.transform.position.x, _defalutRange);
-                        _isFirstDir = true;
-                        OnMove();
-                        return;
-                    }
-                    else
-                    {
-                        gameObject.transform.Translate(0f, -_speed, 0f);
+                        if (gameObject.transform.position.y <= _defalutRange)
+                        {
+                            await UniTask.Delay(_waitTime);
+                            gameObject.transform.position =
+                                new Vector2(gameObject.transform.position.x, _defalutRange);
+                            _isFirstDir = true;
+                            OnMove();
+                            return;
+                        }
+                        else
+                        {
+                            gameObject.transform.Translate(0f, -_speed, 0f);
+                        }
                     }
                 }
             case FloorDirType.Down:
                 while (true)
                 {
                     await UniTask.Yield();
-                    if (!_isMoving)
+                    if (!_isPause && !_isMoving)
                     {
-                        return;
-                    }
-                    if (gameObject.transform.position.y >= _defalutRange)
-                    {
-                        gameObject.transform.position =
-                            new Vector2(gameObject.transform.position.x, _defalutRange);
-                        _isFirstDir = true;
-                        OnMove();
-                        return;
-                    }
-                    else
-                    {
-                        gameObject.transform.Translate(0f, -_speed, 0f);
+                        if (gameObject.transform.position.y >= _defalutRange)
+                        {
+                            await UniTask.Delay(_waitTime);
+                            gameObject.transform.position =
+                                new Vector2(gameObject.transform.position.x, _defalutRange);
+                            _isFirstDir = true;
+                            OnMove();
+                            return;
+                        }
+                        else
+                        {
+                            gameObject.transform.Translate(0f, -_speed, 0f);
+                        }
                     }
                 }
         }
@@ -235,12 +243,20 @@ public class FloorController : MonoBehaviour
     void LightOn()
     {
         _isMoving = true;
-        if (_isFirstDir) OnMove();
-        else OnBack();
     }
 
     void LightOff()
     {
         _isMoving = false;
+    }
+
+    void Pause()
+    {
+        _isPause = true;
+    }
+
+    void Restart()
+    {
+        _isPause = false;
     }
 }

@@ -12,6 +12,8 @@ public class TimeManager : SingletonMonoBehaviour<TimeManager>
     protected override void Awake()
     {
         base.Awake();
+        PauseManager.Instance.OnPause += TimerStop;
+        PauseManager.Instance.OnRestart += TimerStart;
         TimerStart();
     }
 

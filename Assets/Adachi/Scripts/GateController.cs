@@ -17,10 +17,15 @@ public class GateController : MonoBehaviour
 
     bool _isOpen = true;
     bool _isMoving = true;
+    bool _isPause;
 
     private void Awake()
     {
         _defalutRange = gameObject.transform.position.y;
+        PauseManager.Instance.OnPause += Pause;
+        PauseManager.Instance.OnRestart += Restart;
+        LightManager.Instance.LightOn += LightOn;
+        LightManager.Instance.LightOff += LightOff;
     }
 
     async private void OnOpen()
@@ -28,20 +33,23 @@ public class GateController : MonoBehaviour
         while(true)
         {
             await UniTask.Yield();
-            if (!_isMoving)
+            if (!_isPause)
             {
-                return;
-            }
-            if(gameObject.transform.position.y >= _limitRange)
-            {
-                gameObject.transform.position =
-                    new Vector2(gameObject.transform.position.x,_limitRange);
-                _isOpen = false;
-                return;
-            }
-            else
-            {
-                gameObject.transform.Translate(0f,_speed,0f);
+                if (!_isMoving)
+                {
+                    return;
+                }
+                if (gameObject.transform.position.y >= _limitRange)
+                {
+                    gameObject.transform.position =
+                        new Vector2(gameObject.transform.position.x, _limitRange);
+                    _isOpen = false;
+                    return;
+                }
+                else
+                {
+                    gameObject.transform.Translate(0f, _speed, 0f);
+                }
             }
         }
     }
@@ -51,20 +59,23 @@ public class GateController : MonoBehaviour
         while (true)
         {
             await UniTask.Yield();
-            if(!_isMoving)
+            if (!_isPause)
             {
-                return;
-            }
-            if (gameObject.transform.position.y <= _defalutRange)
-            {
-                gameObject.transform.position =
-                    new Vector2(gameObject.transform.position.x, _defalutRange);
-                _isOpen = true;
-                return;
-            }
-            else
-            {
-                gameObject.transform.Translate(0f, -_speed, 0f);
+                if (!_isMoving)
+                {
+                    return;
+                }
+                if (gameObject.transform.position.y <= _defalutRange)
+                {
+                    gameObject.transform.position =
+                        new Vector2(gameObject.transform.position.x, _defalutRange);
+                    _isOpen = true;
+                    return;
+                }
+                else
+                {
+                    gameObject.transform.Translate(0f, -_speed, 0f);
+                }
             }
         }
     }
@@ -94,5 +105,15 @@ public class GateController : MonoBehaviour
     void LightOff()
     {
         _isMoving = false;
+    }
+
+    void Pause()
+    {
+        _isPause = true;
+    }
+
+    void Restart()
+    {
+        _isPause = false;
     }
 }
