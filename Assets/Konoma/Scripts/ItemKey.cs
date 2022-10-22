@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemKye : MonoBehaviour
+public class ItemKey : MonoBehaviour
 {
     void OnTriggerEnter2D(Collider2D collision)
     {
