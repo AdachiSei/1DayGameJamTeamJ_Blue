@@ -23,6 +23,14 @@ public class HumanEnemy : EnemyBase
         OnMove();
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.TryGetComponent(out PlayerController player) && _isMoving)
+        {
+            player.gameObject.SetActive(false);
+        }
+    }
+
     protected override void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject == _leftPos.gameObject)
@@ -33,10 +41,7 @@ public class HumanEnemy : EnemyBase
         {
             _isRightMoving = false;
         }
-        if(collision.TryGetComponent(out PlayerController player) && _isMoving)
-        {
-            player.gameObject.SetActive(false);
-        }
+        
     }
 
     async protected override void OnMove()
@@ -58,6 +63,8 @@ public class HumanEnemy : EnemyBase
                 {
                     _rb.velocity = Vector2.left * Speed;
                 }
+                if (_rb.velocity.x > 0f) _spriteRenderer.flipX = true;
+                else if (_rb.velocity.x < 0f) _spriteRenderer.flipX = false;
             }
         }
     }
