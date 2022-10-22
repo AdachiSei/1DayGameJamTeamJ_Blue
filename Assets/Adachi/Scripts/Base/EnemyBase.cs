@@ -15,6 +15,8 @@ public class EnemyBase : MonoBehaviour
 
     protected Rigidbody2D _rb;
 
+    protected SpriteRenderer _spriteRenderer;
+
     /// <summary>
     /// ベロシティを保存
     /// </summary>
@@ -25,6 +27,7 @@ public class EnemyBase : MonoBehaviour
     protected virtual void Awake()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
         PauseManager.Instance.OnPause += Pause;
         PauseManager.Instance.OnRestart += Restart;
         LightManager.Instance.LightOn += LightOn;

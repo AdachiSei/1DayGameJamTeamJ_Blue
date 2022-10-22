@@ -43,11 +43,11 @@ public class GhostEnemy : EnemyBase
                 //プレイヤーが左にいる
                 bool left = _player.gameObject.transform.position.x <
                                 gameObject.transform.position.x;
-                if (!_player.flipX && left)//プレイヤーが左にいて右を向いていたら
+                if (!_player.flipX && right)//プレイヤーが左にいて右を向いていたら
                 {
                     _rb.velocity = Vector2.zero;
                 }
-                else if (_player.flipX && right)
+                else if (_player.flipX && left)
                 {
                     _rb.velocity = Vector2.zero;
                 }
@@ -56,6 +56,8 @@ public class GhostEnemy : EnemyBase
                     Vector2 _follow = _player.transform.position - gameObject.transform.position;
                     _rb.velocity = _follow.normalized * Speed;
                 }
+                if (_rb.velocity.x > 0f) _spriteRenderer.flipX = true;
+                else if (_rb.velocity.x < 0f) _spriteRenderer.flipX = false;
             }
         }
     }
