@@ -9,9 +9,11 @@ public class ItemBattery : MonoBehaviour
         if (collision.gameObject.TryGetComponent(out PlayerController player))
         {
             Debug.Log("バッテリーを拾った。");
-            //SoundManager.Instance.PlaySFX(SFXType.)
+
+            SoundManager.Instance.PlaySFX(SFXType.ItemGet);
 
             player.BatteryExchange();
+            ///<summary>バッテリーの残量を全回復する.</summary>
             gameObject.SetActive(false);
         }
     }
