@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     float _maxBattery;
 
     /// <summary>バッテリー残量</summary>
+    [SerializeField]
     float _nowBattery;
 
     /// <summary>ライトの判定</summary>
@@ -50,6 +51,7 @@ public class PlayerController : MonoBehaviour
         _light = true;
         PauseManager.Instance.OnPause += Pause;
         PauseManager.Instance.OnRestart += Restart;
+        _nowBattery = _maxBattery;
     }
 
     // Update is called once per frame
@@ -65,7 +67,11 @@ public class PlayerController : MonoBehaviour
             _rb.velocity = new Vector2(moveX * _moveSpeed, _rb.velocity.y);
             _anim.SetBool("Walk", moveX != 0);
 
-            if(_light) _nowBattery = _maxBattery - Time.deltaTime;
+            if (_light)
+            {
+                _nowBattery -= Time.deltaTime;
+                UIManager.Instance.UseBattery();
+            }
             if(_nowBattery < 0)
             {
                 if(_isFirst)LightManager.Instance.OffLight();
@@ -77,7 +83,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnDisable()
     {
-        
+        UIManager.Instance.SetActiveGameOverPanel();
     }
 
     /// <summary>アイテム「バッテリー」に触れたらバッテリー残量を全回復</summary>
@@ -88,7 +94,7 @@ public class PlayerController : MonoBehaviour
     }
 
     /// <summary>ライトの付ける・消すの判定</summary>
-    public void BoolLight()
+    void BoolLight()
     {
         if (!_light)
         {

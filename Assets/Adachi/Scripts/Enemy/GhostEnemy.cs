@@ -71,7 +71,6 @@ public class GhostEnemy : EnemyBase
 
     protected override void LightOff()
     {
-        Debug.Log("Ž~‚Ü‚é");
         //_rb.constraints = RigidbodyConstraints2D.None;
         //_rb.velocity = _saveVelocity;
         _isMoving = true;
