@@ -26,6 +26,7 @@ public class LightManager : SingletonMonoBehaviour<LightManager>
     {
         _lightOn.gameObject.SetActive(true);
         _lightOff.gameObject.SetActive(false);
+        SoundManager.Instance.PlaySFX(SFXType.LightOnOff);
         LightOn();
     }
 
@@ -33,6 +34,7 @@ public class LightManager : SingletonMonoBehaviour<LightManager>
     {
         _lightOn.gameObject.SetActive(false);
         _lightOff.gameObject.SetActive(true);
+        SoundManager.Instance.PlaySFX(SFXType.LightOnOff);
         LightOff();
     }
 }

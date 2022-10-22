@@ -16,6 +16,7 @@ public class GoalDoor : MonoBehaviour
                 //se‚ð–Â‚ç‚·
                 Debug.Log("ƒNƒŠƒA");
                 UIManager.Instance.SetActiveClearPanel();
+                SoundManager.Instance.PlayBGM(BGMType.Clear);
             }
             
         }

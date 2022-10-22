@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/kanaya/TitleScene.unity
+    path: Assets/MasterScene/TitleScene.unity
     guid: 9f5f5b2417fe37e4498f6ceb9d0e2b7a
   - enabled: 1
     path: Assets/MasterScene/GameScene.unity
