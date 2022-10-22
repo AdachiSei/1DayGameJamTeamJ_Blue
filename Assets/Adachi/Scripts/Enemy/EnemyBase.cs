@@ -37,18 +37,11 @@ public class EnemyBase : MonoBehaviour
         
     }
 
-
-    /// <summary>
-    /// ポーズ
-    /// </summary>
     protected virtual void LightOn()
     {
 
     }
 
-    /// <summary>
-    /// リスタート
-    /// </summary>
     protected virtual void LightOff()
     {
 
