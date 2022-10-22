@@ -18,11 +18,11 @@ public class Battery : MonoBehaviour
     }
     public void UseBattery()
     {
-        Debug.Log("Œ»Ý’lF" + _batterySlider.value);
+        _batterySlider.value = _playerCon.NowBattery;
 
-        if (_batterySlider.value >= 50)
+        if (_batterySlider.value <= 0)
         {
-            Debug.Log("50ˆÈã‚Å‚·");
+            //“”‚è‚ðÁ‚·B
         }
 
     }
