@@ -6,5 +6,6 @@ public enum SFXType
     Empty,
     //‰º‚ÉSFX‚Ì–¼‘O‚ğ‘S‚Ä‘‚¢‚Ä‚­‚¾‚³‚¢
     Click,
-    ItemGet
+    ItemGet,
+    LightOnOff
 }
