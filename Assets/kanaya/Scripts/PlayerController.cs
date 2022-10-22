@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
 
     public bool Light => _light;
 
+    public bool Key => _key;
+
     [SerializeField]
     SpriteRenderer _rend;
 
@@ -28,6 +30,8 @@ public class PlayerController : MonoBehaviour
     /// <summary>ライトの判定</summary>
     bool _light;
 
+    /// <summary>鍵の判定</summary>
+    bool _key;
     void Start()
     {
         _anim = GetComponent<Animator>();
@@ -51,8 +55,6 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q)) BoolLight();
 
-        if (Input.GetKeyDown(KeyCode.E)) BatteryExchange();
-
     }
 
     /// <summary>アイテム「バッテリー」に触れたらバッテリー残量を全回復</summary>
@@ -74,5 +76,6 @@ public class PlayerController : MonoBehaviour
             //ライトを消す
         }
     }
+
 
 }
