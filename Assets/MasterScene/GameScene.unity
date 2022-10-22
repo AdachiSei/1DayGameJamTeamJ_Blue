@@ -329,7 +329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rend: {fileID: 139999417}
   _moveSpeed: 2.5
-  _maxBattery: 0
+  _maxBattery: 60
 --- !u!95 &139999416
 Animator:
   serializedVersion: 4
