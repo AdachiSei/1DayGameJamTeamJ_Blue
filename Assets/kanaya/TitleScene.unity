@@ -2371,7 +2371,7 @@ GameObject:
   - component: {fileID: 1201003773}
   - component: {fileID: 1201003772}
   m_Layer: 5
-  m_Name: Image
+  m_Name: TitleImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2931,7 +2931,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rend: {fileID: 1698103914}
   _moveSpeed: 2.5
-  _batteryAll: 15
+  _maxBattery: 0
 --- !u!95 &1698103913
 Animator:
   serializedVersion: 4
@@ -3128,8 +3128,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1758178547}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -959.6, y: -543.15, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 1}
+  m_LocalPosition: {x: -959.96, y: -543.01, z: 0}
+  m_LocalScale: {x: 0.17, y: 0.17, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1533528692}
