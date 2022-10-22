@@ -367,7 +367,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4702657745663264579, guid: 40762574096e37740805904e7f477e24, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: GameScene
+      value: GameScene2
       objectReference: {fileID: 0}
     - target: {fileID: 8311206449009471265, guid: 40762574096e37740805904e7f477e24, type: 3}
       propertyPath: m_Name
