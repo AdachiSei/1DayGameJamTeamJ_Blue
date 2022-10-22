@@ -16,7 +16,7 @@ public class GateController : MonoBehaviour
     float _defalutRange;
 
     bool _isOpen = true;
-    public bool _isMoving = true;
+    bool _isMoving = true;
 
     private void Awake()
     {
