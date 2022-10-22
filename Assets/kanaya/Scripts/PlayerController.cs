@@ -70,6 +70,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        
+    }
+
     /// <summary>アイテム「バッテリー」に触れたらバッテリー残量を全回復</summary>
     public void BatteryExchange()
     {

@@ -9,7 +9,7 @@ public class ItemKey : MonoBehaviour
         if (collision.gameObject.TryGetComponent( out PlayerController player))
         {
             Debug.Log("Œ®‚ğE‚Á‚½");
-
+            player.GetKey();
             SoundManager.Instance.PlaySFX(SFXType.ItemGet);
 
             gameObject.SetActive(false);

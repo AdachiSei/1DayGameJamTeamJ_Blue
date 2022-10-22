@@ -33,6 +33,10 @@ public class HumanEnemy : EnemyBase
         {
             _isRightMoving = false;
         }
+        if(collision.TryGetComponent(out PlayerController player) && _isMoving)
+        {
+            player.gameObject.SetActive(false);
+        }
     }
 
     async protected override void OnMove()

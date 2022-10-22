@@ -18,6 +18,14 @@ public class GhostEnemy : EnemyBase
         gameObject.SetActive(false);
     }
 
+    protected override void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.TryGetComponent(out PlayerController player) && _isMoving)
+        {
+            player.gameObject.SetActive(false);
+        }
+    }
+
     async protected override void OnMove()
     {
         while(true)

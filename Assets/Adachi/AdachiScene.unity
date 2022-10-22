@@ -560,8 +560,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isDontDestroy: 0
   _bGMType: 0
-  _soundSFX: []
-  _soundBGM: []
+  _soundSFX:
+  - _type: 2
+    _clip: {fileID: 8300000, guid: 0715c3e2640397e47aec9a7649decc55, type: 3}
+  _soundBGM:
+  - _type: 4
+    _clip: {fileID: 8300000, guid: 7c48d135d64c53a46ad73e51e9bb9f79, type: 3}
 --- !u!4 &463815005
 Transform:
   m_ObjectHideFlags: 0
