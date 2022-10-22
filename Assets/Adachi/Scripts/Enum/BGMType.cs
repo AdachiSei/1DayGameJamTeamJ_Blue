@@ -6,7 +6,6 @@ public enum BGMType
     Empty,
     //‰º‚ÉBGM‚Ì–¼‘O‚ğ‘S‚Ä‘‚¢‚Ä‚­‚¾‚³‚¢
     Title,
-    StageSelect,
     Game,
     Clear,
     GameOver
