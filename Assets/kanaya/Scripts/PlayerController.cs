@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class PlayerController : MonoBehaviour
     public bool Light => _light;
 
     public bool Key => _key;
+
+    public float NowBattery => _nowBattery;
+
+    public float MaxBattery => _maxBattery;
 
     [SerializeField]
     SpriteRenderer _rend;
@@ -22,10 +27,10 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     [Header("バッテリー容量の初期値")]
-    float _batteryAll;
+    float _maxBattery;
 
     /// <summary>バッテリー残量</summary>
-    float _batteryRemain;
+    float _nowBattery;
 
     /// <summary>ライトの判定</summary>
     bool _light;
@@ -60,8 +65,8 @@ public class PlayerController : MonoBehaviour
             _rb.velocity = new Vector2(moveX * _moveSpeed, _rb.velocity.y);
             _anim.SetBool("Walk", moveX != 0);
 
-            if(_light) _batteryRemain = _batteryAll - Time.deltaTime;
-            if(_batteryRemain < 0)
+            if(_light) _nowBattery = _maxBattery - Time.deltaTime;
+            if(_nowBattery < 0)
             {
                 if(_isFirst)LightManager.Instance.OffLight();
             }
@@ -73,7 +78,7 @@ public class PlayerController : MonoBehaviour
     /// <summary>アイテム「バッテリー」に触れたらバッテリー残量を全回復</summary>
     public void BatteryExchange()
     {
-        _batteryRemain = _batteryAll;
+        _nowBattery = _maxBattery;
         _isFirst = true;
     }
 
