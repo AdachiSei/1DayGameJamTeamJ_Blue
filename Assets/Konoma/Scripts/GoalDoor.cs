@@ -18,11 +18,15 @@ public class GoalDoor : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        //if ()
+        if (TryGetComponent(out PlayerController player))
         {
-            //seを鳴らす
-            Debug.Log("クリア");
-            _clearCanvas.SetActive(true);
+            if(player.Key)
+            {
+                //seを鳴らす
+                Debug.Log("クリア");
+                _clearCanvas.SetActive(true);
+            }
+            
         }
     }
 
