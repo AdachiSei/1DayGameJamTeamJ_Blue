@@ -329,7 +329,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _rend: {fileID: 933228671}
   _moveSpeed: 2.5
-  _batteryAll: 0
+  _batteryAll: 15
 --- !u!50 &933228674
 Rigidbody2D:
   serializedVersion: 4
