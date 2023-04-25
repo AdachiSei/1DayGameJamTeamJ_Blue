@@ -1,5 +1,7 @@
 # 1DayGameJamTeamJ_Blue
 
+脱出ゲーム
+
 安達青
 精いっぱい頑張ります
 
